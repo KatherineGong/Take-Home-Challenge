@@ -1,0 +1,97 @@
+---
+title: "Task 16"
+author: "Katherine Gong"
+date: "2024-04-27"
+output: pdf_document
+---
+
+General Objective
+The following research question aims to assess the candidate’s ability to use skills relevant to statistical analysis in a typical medical reaserch. The candidate may use any program, tool, or reference material to perform the work, unless specific instructions are otherwise provided.
+
+Background
+The question pertains to analyses of proteomic abundance levels. To identify proteins associated with a disease status, scientists often perform diffential abundance analysis using the quantified proteins. 
+
+Question & Goals
+The goal is to examine whether any of proteins are associated with disease status. Scientists typically perform analysis, evaluates statistical models, and examine the outcome using volcano plots. Protein abundance values and annotation information are provided as csv file. In addition, covariate file includes the sample information along with demographic phenotype of the subject (Age, Gender, Disease_Status, PlateID).
+
+Load Necessary Libraries
+```{r}
+library(limma)
+library(edgeR)
+library(ggplot2)
+suppressPackageStartupMessages(library(dplyr))
+library(tidyr)
+```
+
+
+Load the Data
+```{r}
+# Load protein abundance data
+protein_data <- read.csv("/Users/katherinegong/Documents/Take Home Challenge/Cruchaga Lab/Task16_Proteomics_Diff/Protein_Matrix.csv")
+
+# Load annotation information
+annotation_info <- read.csv("/Users/katherinegong/Documents/Take Home Challenge/Cruchaga Lab/Task16_Proteomics_Diff/Protein_Annotation.csv")
+
+# Load covariate file
+covariate_data <- read.csv("/Users/katherinegong/Documents/Take Home Challenge/Cruchaga Lab/Task16_Proteomics_Diff/Covariates.csv")
+```
+
+```{r}
+ncol(protein_data)
+```
+
+Data Preprocessing
+```{r}
+rownames(protein_data) <- protein_data[,1]
+exp <- protein_data[,-1]
+```
+
+```{r}
+dim(exp)
+```
+
+```{r}
+# Protein Selection
+# There are total 192 samples, show only the protein only show in at least 128 samples.
+exp <- exp[, colSums(is.na(exp)) <= 30] 
+```
+
+```{r}
+dim(exp)
+```
+
+
+Data Preparation
+```{r}
+# Combine protein_data and covariate_data
+combined_data <- protein_data %>%
+  left_join(covariate_data[c("Disease_Status","SampleId")], by = "SampleId")
+```
+
+```{r}
+protein_data[,-1]
+```
+
+
+
+The following lists specific instructions:
+	1) Run differential analysis with and without covariates (age, sex, plateID).
+
+
+	2) Create a volcano plot for both results (x-axis for effect sizes, y-axis for -log10(p-values)).
+	3) Obtain the number of significant variants (based on FDR threshold).
+	4) Create a scatterplot of effects sizes between two analyses.
+					
+Deliverables
+	1) Share a record of commands used to answer the question. The candidate does not need to include all details, but the overall process should be shared. Additionally sharing specific codes is helpful.
+	2) Provide a brief synopsis of the findings and what they mean.
+		a. Specifically show the model (with and without covariate adjustment) in R code.
+		b. Specifically share the P-values, effect size, FDR along with analyte ID.
+	3) Briefly comment how would you document the code/data and share it on GitHub.
+
+In case there’s obstacles in the sequential steps outlined above, intermediary files can be provided to help pass them. When using these, please comment how you believe the prior steps should have been approached and what was the challenge you experienced.
+
+```{r}
+
+```
+
