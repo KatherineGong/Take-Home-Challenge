@@ -31,6 +31,13 @@ According to the Input Data Dictionary, the 'DateofApoe' column represents the d
 
 The other columns contain a mixture of numbers and characters. For the 'barcode' column, the length is not fixed, and it can be considered as a 'tag'. Therefore, based on this, all the remaining columns are set as text.
 
+Common Table Expressions (CTEs) can simplify queries and improve readability.
+
+Following the instructions, I started by using two Common Table Expressions (CTEs) for distinct "SnpAssayName" to simplify the querying process. In the query, I used the CASE WHEN statement to determine the "APOE_Genotype". Additionally, since "UniquePhenoID" acts as a unique identifier for individuals, I used it along with the date the assay was run for that barcode and the barcode to join the two tables in the query. I performed a full JOIN because there are "UniquePhenoID" values that exist only in Table A. I exported Table 1 as a .csv file for testing purposes.
+
+Table 2 is constructed by incorporating the results from Table 1 as a CTE. Additionally, a new column "APOE_Genotype" is introduced, determined by the characteristics of the "Barcode" and "APOE_Genotype" features. 
+Similarly, I exported Table 2 as a .csv file for testing purposes.
+
 # Task 12a Dockerfile
 with detailed information on how you performed your analyses.
 ## Purpose
