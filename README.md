@@ -35,7 +35,7 @@ Common Table Expressions (CTEs) can simplify queries and improve readability.
 
 Following the instructions, I started by using two Common Table Expressions (CTEs) for distinct "SnpAssayName" to simplify the querying process. In the query, I used the CASE WHEN statement to determine the "APOE_Genotype". Additionally, since "UniquePhenoID" acts as a unique identifier for individuals, I used it along with the date the assay was run for that barcode and the barcode to join the two tables in the query. I performed a full JOIN because there are "UniquePhenoID" values that exist only in Table A. I exported Table 1 as a .csv file for testing purposes.
 
-Table 2 is constructed by incorporating the results from Table 1 as a CTE. Additionally, a new column "APOE_Genotype" is introduced, determined by the characteristics of the "Barcode" and "APOE_Genotype" features. 
+Table 2 is created by integrating the results from Table 1 into a Common Table Expression (CTE) named 'C'. Furthermore, a new column "APOE_Genotype" is introduced, which is determined based on the characteristics of the "Barcode" and "APOE_Genotype" features for each patient record. To achieve this, I created another CTE named 'D'. Finally, I utilized C to perform a left join with D to obtain the final table.
 Similarly, I exported Table 2 as a .csv file for testing purposes.
 
 # Task 12a Dockerfile
