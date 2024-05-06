@@ -33,7 +33,7 @@ The other columns contain a mixture of numbers and characters. For the 'barcode'
 
 Common Table Expressions (CTEs) can simplify queries and improve readability.
 
-Following the instructions, I started by using two Common Table Expressions (CTEs) for distinct "SnpAssayName" to simplify the querying process. In the query, I used the CASE WHEN statement to determine the "APOE_Genotype". Additionally, since "UniquePhenoID" acts as a unique identifier for individuals, I used it along with the date the assay was run for that barcode and the barcode to join the two tables in the query. I performed a full JOIN because there are "UniquePhenoID" values that exist only in Table A. I exported Table 1 as a .csv file for testing purposes.
+Following the instructions, I started by using two Common Table Expressions (CTEs) for distinct "SnpAssayName" to simplify the querying process. In the query, I used the CASE WHEN statement to determine the "APOE_Genotype". Furthermore, as "UniquePhenoID" serves as a unique identifier for individuals, I utilized it in conjunction with the date and the barcode to merge the two tables in the query. I performed a full JOIN because there are "UniquePhenoID" values that exist only in Table A. I exported Table 1 as a .csv file for testing purposes.
 
 Table 2 is created by integrating the results from Table 1 into a Common Table Expression (CTE) named 'C'. Furthermore, a new column "APOE_Genotype" is introduced, which is determined based on the characteristics of the "Barcode" and "APOE_Genotype" features for each patient record. To achieve this, I created another CTE named 'D'. Finally, I utilized C to perform a left join with D to obtain the final table.
 Similarly, I exported Table 2 as a .csv file for testing purposes.
@@ -73,6 +73,9 @@ apt-get is used to install the dependencies required for the compilation process
 Since all three tools are Linux-supported and have minimal version requirements, they can be installed on the Ubuntu:20.04 base image. 
 
 Next, visit the official GitHub repository where they have provided instructions on how to install them in the Dockerfile.
+
 [STAR](https://github.com/alexdobin/STAR)
+
 [Samtools](https://github.com/samtools/samtools)
+
 [BEDTools](https://github.com/arq5x/bedtools2)
