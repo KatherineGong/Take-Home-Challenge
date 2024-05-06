@@ -58,6 +58,7 @@ Next, use the image to create an interactive container.
 `docker run -it <image name>`
 
 The following commands can be used to verify the successful installation of the three tools.
+
 `STAR-2.7.11b/bin/Linux_x86_64_static/STAR --help`
 
 `bedtools2/bin/bedtools --help`
