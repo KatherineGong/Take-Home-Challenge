@@ -79,3 +79,12 @@ Next, visit the official GitHub repository where they have provided instructions
 [Samtools](https://github.com/samtools/samtools)
 
 [BEDTools](https://github.com/arq5x/bedtools2)
+
+# Task 16 Proteomics_Diff
+## Output
+Task16.pdf: Document the code and include comments to explain the results. 
+
+## How to Solve this Problem
+The main objective of this analysis is to investigate whether any proteins are associated with disease status. After loading the data, I first cleaned and preprocessed the protein dataset. For each column representing a specific protein, I checked for NA values to determine if any proteins were not present in enough samples (at least 70% of the 192 samples). Additionally, I checked for any duplicate protein names in the dataset. Since the NA values in the protein dataset were caused by outliers in the QA process, I did not impute them with any specific value, as the model will automatically exclude such values, and the NA value ratio in each column is not large. After this, I merged the protein data with the covariate data.
+
+Given that we aim to explore the relationship between disease status and protein levels, it is natural to consider disease as the independent variable and use protein abundance levels as the dependent variable. Since protein abundance values exhibit relatively high variance, I used log transformation to normalize them. Following this preparation, I utilized linear regression to fit the model. In the model with covariates, I excluded gender from the regression model since all data in the dataset are female. To ensure the code's reusability for future research that may include different genders, I utilized an if statement.
