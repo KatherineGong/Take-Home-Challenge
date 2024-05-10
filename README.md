@@ -87,7 +87,7 @@ Next, visit the official GitHub repository where they have provided instructions
 ## Output
 Task16.pdf: Document the code and include comments to explain the results. 
 
-Output.csv & Output_with_cov: Include the P-values, effect size, and false discovery rate (FDR) for each analyte ID.
+output.csv & output_with_cov: Include the P-values, effect size, and false discovery rate (FDR) for each analyte ID.
 
 ## How to Solve this Problem
 The main objective of this analysis is to investigate whether any proteins are associated with disease status. After loading the data, I first cleaned and preprocessed the protein dataset. For each column representing a specific protein, I checked for NA values to determine if any proteins were not present in enough samples (at least 70% of the 192 samples). Additionally, I checked for any duplicate protein names in the dataset. 
