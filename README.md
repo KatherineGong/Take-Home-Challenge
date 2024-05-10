@@ -35,7 +35,10 @@ Common Table Expressions (CTEs) can simplify queries and improve readability.
 
 Following the instructions, I started by using two Common Table Expressions (CTEs) for distinct "SnpAssayName" to simplify the querying process. In the query, I used the CASE WHEN statement to determine the "APOE_Genotype". Furthermore, as "UniquePhenoID" serves as a unique identifier for individuals, I utilized it in conjunction with the date and the barcode to merge the two tables in the query. I performed a full JOIN because there are "UniquePhenoID" values that exist only in Table A. I exported Table 1 as a .csv file for testing purposes.
 
-Table 2 is created by integrating the results from Table 1 into a Common Table Expression (CTE) named 'C'. Furthermore, a new column "APOE_Genotype" is introduced, which is determined based on the characteristics of the "Barcode" and "APOE_Genotype" features for each patient record. To achieve this, I created another CTE named 'D'. Finally, I utilized C to perform a left join with D to obtain the final table.
+Table 2 is created by integrating the results from Table 1 into a Common Table Expression (CTE) named 'C'. Furthermore, a new column "APOE_Genotype" is introduced, which is determined based on the characteristics of the "Barcode" and "APOE_Genotype" features for each patient record. To achieve this, I created another CTE named 'D'. Finally, I utilized C to perform a left join with D to obtain the final table. 
+
+Specifically, handling records with null values is crucial, as demonstrated in CTE 'D' of the process. For instance, when a unique barcode is present, it should be tagged as "Unverified" only if the 'APOE_Genotype' is not empty; otherwise, it should be classified as 'No Data'. Similar considerations have been accounted for throughout the creation process of CTE 'D'.
+
 Similarly, I exported Table 2 as a .csv file for testing purposes.
 
 # Task 12a Dockerfile
@@ -85,6 +88,14 @@ Next, visit the official GitHub repository where they have provided instructions
 Task16.pdf: Document the code and include comments to explain the results. 
 
 ## How to Solve this Problem
-The main objective of this analysis is to investigate whether any proteins are associated with disease status. After loading the data, I first cleaned and preprocessed the protein dataset. For each column representing a specific protein, I checked for NA values to determine if any proteins were not present in enough samples (at least 70% of the 192 samples). Additionally, I checked for any duplicate protein names in the dataset. Since the NA values in the protein dataset were caused by outliers in the QA process, I did not impute them with any specific value, as the model will automatically exclude such values, and the NA value ratio in each column is not large. After this, I merged the protein data with the covariate data.
+The main objective of this analysis is to investigate whether any proteins are associated with disease status. After loading the data, I first cleaned and preprocessed the protein dataset. For each column representing a specific protein, I checked for NA values to determine if any proteins were not present in enough samples (at least 70% of the 192 samples). Additionally, I checked for any duplicate protein names in the dataset. 
 
-Given that we aim to explore the relationship between disease status and protein levels, it is natural to consider disease as the independent variable and use protein abundance levels as the dependent variable. Since protein abundance values exhibit relatively high variance, I used log transformation to normalize them. Following this preparation, I utilized linear regression to fit the model. In the model with covariates, I excluded gender from the regression model since all data in the dataset are female. To ensure the code's reusability for future research that may include different genders, I utilized an if statement.
+Since the NA values in the protein dataset were caused by outliers in the QA process, I did not impute them with any specific value, as the regression model will automatically exclude such values, and the NA value ratio in each column is not large. After this, I merged the protein data with the covariate data.
+
+In exploring the relationship between disease status and protein levels, it's logical to designate disease as the independent variable and protein abundance levels as the dependent variable. Given the relatively high variance in protein abundance values, I employed log transformation to normalize them. After this preprocessing step, I opted for linear regression to model the relationship, as it facilitates result interpretation and aligns well with the nature of the analysis.
+
+Function without covariates: log(protein_abundunce_value) ~ Disease_Status
+
+Function with covariates: log(protein_abundunce_value) ~ Disease_Status + Age (+ Gender) + PlateId
+
+In the model with covariates, I omitted gender from the regression model, as the dataset exclusively comprises female data. To ensure the code remains adaptable for future research involving different genders, I integrated an if statement to allow for the selection between two models.
