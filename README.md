@@ -46,7 +46,7 @@ The objective of this task is to create a Dockerfile that constructs a Docker im
 ## Output
 Dockerfile: Document the commands to install STAR alignment software, Samtools software, and BEDTools software.
 
-task12a.pdf: Document the code, screenshots of building the Docker image, launching the interactive container, and verification of the successful installation.
+Task12a.pdf: Document the code, screenshots of building the Docker image, launching the interactive container, and verification of the successful installation.
 
 ## How to Use
 With the Dockerfile provided, proceed to the terminal and input the commands to build the image.
